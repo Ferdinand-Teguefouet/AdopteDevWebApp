@@ -1,0 +1,84 @@
+﻿@model IEnumerable<AdopteDevWebApp.Models.User.GetUserModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+@*<p>
+        <a asp-action="Create">Create New</a>
+    </p>*@
+<table class="table">
+    <thead>
+        <tr>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.Name)*@
+                Nom
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Email)*@
+                Email
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Password)
+                </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.Telephone)*@
+                Téléphone
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.IsClient)*@
+                Type
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Password)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telephone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsClient)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                    @*<button class="btn btn-danger deleteButton" style="color: #ffffff; text-decoration: none;">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>*@
+                    <a class="btn btn-danger deleteButton" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts{
+    <script>
+        const deleteButton = document.getElementsByClassName("deleteButton");
+        for (let button of deleteButton) {
+            button.addEventListener('click', event => {
+                let reponse = confirm("Vous êtes sur le point de supprimer cet élement!");
+                if (!reponse) {
+                    event.preventDefault();
+                }
+            })
+        }
+    </script>
+}

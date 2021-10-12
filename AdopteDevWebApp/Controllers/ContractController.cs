@@ -37,7 +37,8 @@ namespace AdopteDevWebApp.Controllers
             {
                 return View(cc);
             }
-            _contractService.Insert(cc.ToWebApi());
+            _contractService.Insert(cc.ContractToWebApi());
+            TempData["success"] = "Created with success! ";
             return RedirectToAction("Index");
         }
         #endregion

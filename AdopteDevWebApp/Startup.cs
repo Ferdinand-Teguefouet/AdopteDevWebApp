@@ -1,3 +1,5 @@
+using AdopteDevWebApp.Interface;
+using AdopteDevWebApp.Services;
 using DataAccess.Entities;
 using DataAccess.Interface;
 using DataAccess.Services;
@@ -32,6 +34,17 @@ namespace AdopteDevWebApp
             services.AddScoped<IService<User>, UserService>();
             services.AddScoped<IService<Contract>, ContractService>();
             services.AddScoped<IService<Skill>, SkillService>();
+            services.AddScoped<ILoginService, UserService>();
+            services.AddScoped<IHashPw, HashPwService>();
+
+            // ajout des cookies et sessions
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromDays(1);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
