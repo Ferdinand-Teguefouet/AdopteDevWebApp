@@ -1,6 +1,6 @@
 ﻿using AdopteDevWebApp.Models.Contract;
-using AdopteDevWebApp.Models.Login;
 using AdopteDevWebApp.Models.User;
+using AdopteDevWebApp.Security;
 using DataAccess.Entities;
 using System;
 using System.Collections.Generic;
@@ -33,16 +33,16 @@ namespace AdopteDevWebApp.Tools
             };
         }
 
-        public static User UserToWebApi(this AddUser cu)
+        public static User UserToWebApi(this RegisterModel rm)
         {
             return new User
             {
-                Id = cu.Id,
-                Name = cu.Name,
-                Email = cu.Email,
-                Password = cu.Password,
-                Telephone = cu.Telephone,
-                IsClient = cu.IsClient
+                Id = rm.Id,
+                Name = rm.Name,
+                Email = rm.Email,
+                Password = rm.Password,
+                Telephone = rm.Telephone,
+                IsClient = rm.IsClient
             };
         }
 

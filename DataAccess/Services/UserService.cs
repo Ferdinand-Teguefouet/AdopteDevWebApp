@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Services
 {
-    public class UserService : IService<User>, ILoginService
+    public class UserService : IService<User>
     {
         #region Properties
         private string url = "https://localhost:44342/api/";
@@ -102,20 +102,6 @@ namespace DataAccess.Services
                 }
             }
         }
-        #endregion
-
-        public UserLog GetByEmail(string _email)
-        {
-            using (HttpResponseMessage message = _client.GetAsync("User/login/" + _email).Result)
-            {
-                if (!message.IsSuccessStatusCode)
-                {
-                    throw new HttpRequestException();
-                }
-                string json = message.Content.ReadAsStringAsync().Result;
-
-                return JsonConvert.DeserializeObject<UserLog>(json);
-            }
-        }
+        #endregion        
     }
 }

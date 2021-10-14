@@ -34,7 +34,7 @@ namespace AdopteDevWebApp
             services.AddScoped<IService<User>, UserService>();
             services.AddScoped<IService<Contract>, ContractService>();
             services.AddScoped<IService<Skill>, SkillService>();
-            services.AddScoped<ILoginService, UserService>();
+            services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IHashPw, HashPwService>();
 
             // ajout des cookies et sessions

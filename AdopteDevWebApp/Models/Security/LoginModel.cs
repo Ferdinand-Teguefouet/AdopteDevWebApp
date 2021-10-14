@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AdopteDevWebApp.Models.Login
+namespace AdopteDevWebApp.Security
 {
-    public class LoginForm
+    public class LoginModel
     {
         [Required(ErrorMessage = "L'email est obligatoire.")]
         [EmailAddress]
