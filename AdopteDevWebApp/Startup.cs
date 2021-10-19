@@ -5,6 +5,7 @@ using DataAccess.Interface;
 using DataAccess.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,7 @@ namespace AdopteDevWebApp
             services.AddScoped<IService<Contract>, ContractService>();
             services.AddScoped<IService<Skill>, SkillService>();
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IHashPw, HashPwService>();
 
             // ajout des cookies et sessions
@@ -50,6 +52,7 @@ namespace AdopteDevWebApp
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -65,7 +68,11 @@ namespace AdopteDevWebApp
 
             app.UseRouting();
 
+            //------------ Mes config -------
             app.UseAuthorization();
+            app.UseSession();
+
+            //-------------------------------
 
             app.UseEndpoints(endpoints =>
             {

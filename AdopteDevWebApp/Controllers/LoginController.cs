@@ -1,7 +1,10 @@
 ﻿using AdopteDevWebApp.Interface;
+using AdopteDevWebApp.Models.User;
 using AdopteDevWebApp.Security;
+using AdopteDevWebApp.Tools;
 using DataAccess.Entities;
 using DataAccess.Interface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,16 +32,22 @@ namespace AdopteDevWebApp.Controllers
         [HttpPost]
         public IActionResult Login([FromForm] LoginModel logForm)
         {
-            
-            UserLog uLog = _logService.GetByEmail(logForm.Email);
-
-            if (uLog == null || uLog.Password != _hashService.HashPassword(logForm.Password))
+            if (!ModelState.IsValid)
             {
-                TempData["error"] = "Connection problem!";
                 return View(logForm);
             }
+
+            GetUserModel currentUser = _logService.Login(logForm.Email, logForm.Password).UserToWebApp();
+            // il faut utiliser le HttpContext.Session pour écrire en Session
+            HttpContext.Session.SetUser(currentUser);
+
+            //if (uLog == null || uLog.Password != _hashService.HashPassword(logForm.Password))
+            //{
+            //    TempData["error"] = "Connection problem!";
+            //    return View(logForm);
+            //}
             // if(client.Password == password) rediriger
-            TempData["success"] = "Welcome " + uLog.Email;
+            TempData["success"] = "Welcome " + currentUser.Email;
             //HttpContext.Session.SetString("Rôle", user.IsClient ? "Client" : "Developper");
             //HttpContext.Session.SetInt32("Id", user.Id);
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,8 +26,9 @@ namespace DataAccess.Services
         }
         #endregion
         #region Using DeleteAsync() to delete an element by id
-        public void Delete(int _id)
+        public void Delete(int _id, string _token)
         {
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             using (HttpResponseMessage message = _client.DeleteAsync("contract/" + _id).Result)
             {
                 if (!message.IsSuccessStatusCode)
@@ -38,9 +40,10 @@ namespace DataAccess.Services
         #endregion
 
         #region Using GetAsync() to read all
-        public IEnumerable<Contract> GetAll()
+        public IEnumerable<Contract> GetAll(string _token)
         {
-            using (HttpResponseMessage message = _client.GetAsync("contract/").Result)
+            _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+            using (HttpResponseMessage message = _client.GetAsync("contract").Result)
             {
                 if (!message.IsSuccessStatusCode)
                 {

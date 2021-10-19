@@ -33,9 +33,9 @@ namespace AdopteDevWebApp.Tools
             };
         }
 
-        public static User UserToWebApi(this RegisterModel rm)
+        public static UserToAdd UserToWebApi(this RegisterModel rm)
         {
-            return new User
+            return new UserToAdd
             {
                 Id = rm.Id,
                 Name = rm.Name,
@@ -53,7 +53,7 @@ namespace AdopteDevWebApp.Tools
                 Id = u.Id,
                 Name = u.Name,
                 Email = u.Email,
-                Password = u.Password,
+                Token = u.Token,
                 Telephone = u.Telephone,
                 IsClient = u.IsClient
             };

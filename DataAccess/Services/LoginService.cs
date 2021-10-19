@@ -24,18 +24,24 @@ namespace DataAccess.Services
             _client.BaseAddress = new Uri(url);
         }
         #endregion
-        public UserLog GetByEmail(string _email)
+        public User Login(string _email, string _password)
         {
-            using (HttpResponseMessage message = _client.GetAsync("User/login/" + _email).Result)
-            {
-                if (!message.IsSuccessStatusCode)
-                {
-                    throw new HttpRequestException();
-                }
-                string json = message.Content.ReadAsStringAsync().Result;
+            string jsonBody = JsonConvert.SerializeObject(new { email = _email, password = _password });
+            HttpContent content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
 
-                return JsonConvert.DeserializeObject<UserLog>(json);
+            string jsonResponse;
+            using (HttpResponseMessage message = _client.PostAsync("user/login", content).Result)
+            {
+                //if (!message.IsSuccessStatusCode)
+                //{
+                //    throw new HttpRequestException();
+                //}
+
+                // Vérifie si le statut code est bon
+                message.EnsureSuccessStatusCode();
+                jsonResponse = message.Content.ReadAsStringAsync().Result;                
             }
+            return JsonConvert.DeserializeObject<User>(jsonResponse);
         }
     }
 }

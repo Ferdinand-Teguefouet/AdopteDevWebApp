@@ -4,6 +4,8 @@ using AdopteDevWebApp.Security;
 using AdopteDevWebApp.Tools;
 using DataAccess.Entities;
 using DataAccess.Interface;
+using DataAccess.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,12 +17,13 @@ namespace AdopteDevWebApp.Controllers
     public class RegisterController : Controller
     {
         private readonly IHashPw _hashService;
-        private readonly IService<User> _userService;
+        private readonly IRegisterService _userService;
 
-        public RegisterController(IHashPw hashService, IService<User> userService)
+        public RegisterController(IHashPw hashService, IRegisterService userService)
         {
             _hashService = hashService;
             _userService = userService;
+
         }
         #region Add an user
         public IActionResult Register()
@@ -35,9 +38,9 @@ namespace AdopteDevWebApp.Controllers
             {
                 return View(rm);
             }
-            rm.Password = _hashService.HashPassword(rm.Password);
+            //rm.Password = _hashService.HashPassword(rm.Password);
             _userService.Insert(rm.UserToWebApi());
-            TempData["success"] = "Inserted with success! ";
+            TempData["success"] = "Inserted with success!";
             return RedirectToAction("Login", "Login");
         }
         #endregion

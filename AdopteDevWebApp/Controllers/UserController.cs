@@ -21,15 +21,25 @@ namespace AdopteDevWebApp.Controllers
             _userService = userService;
         }
 
+        [AuthorizationRequired]
         public IActionResult Index()
         {
-            return View(_userService.GetAll().Select(u => u.UserToWebApp()));
+            return View(_userService.GetAll(HttpContext.Session.GetUser().Token).Select(u => u.UserToWebApp()));
         }
+        [AuthorizationRequired]
+        [DevRequired]
         public IActionResult Delete(int id)
         {
-            _userService.Delete(id);
+            _userService.Delete(id, HttpContext.Session.GetUser().Token);
             TempData["success"] = "Deleted with success! ";
             return RedirectToAction("Index");
+        }
+
+        [AuthorizationRequired]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Disconnect();
+            return RedirectToAction("index");
         }
     }
 }

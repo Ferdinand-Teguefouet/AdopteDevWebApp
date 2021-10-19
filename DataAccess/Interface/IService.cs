@@ -8,8 +8,8 @@ namespace DataAccess.Interface
 {
     public interface IService<T>
     {
-        void Delete(int _id);
-        IEnumerable<T> GetAll();
+        void Delete(int _id, string _token);
+        IEnumerable<T> GetAll(string _token);
         T GetById(int _id);
         void Insert(T _obj);
         void Update(T _obj);

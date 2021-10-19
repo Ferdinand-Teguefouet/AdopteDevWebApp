@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using AdopteDevWebApp.Tools;
+@*@model AdopteDevWebApp.Models.User.GetUserModel;*@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,7 +19,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-column-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -25,6 +27,26 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        @if (SessionManager.userModel == null)
+                        {
+                            <li class="nav-item" style="text-align: right;">
+                                <a class="btn btn-success" asp-area="" asp-controller="Login" asp-action="Login">Sign in</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item" style="text-align: right;">
+                                <a class="btn btn-danger" asp-area="" asp-controller="User" asp-action="Logout">Sign out</a>
+                                @if (SessionManager.userModel != null && SessionManager.userModel.IsClient)
+                                    {
+                                        <span style="color: red; font-weight: 500; opacity: 0.3;">#Client</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="color: red; font-weight: 500; opacity: 0.3;">#Developper</span>
+                                    }
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

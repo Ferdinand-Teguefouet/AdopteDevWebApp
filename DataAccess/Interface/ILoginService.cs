@@ -9,6 +9,6 @@ namespace DataAccess.Interface
 {
     public interface ILoginService
     {
-        UserLog GetByEmail(string _email);
+        User Login(string _email, string _password);
     }
 }

@@ -21,7 +21,7 @@ namespace AdopteDevWebApp.Controllers
 
         public IActionResult Index()
         {
-            return View(_contractService.GetAll().Select(c => c.ToWebApp()));
+            return View(_contractService.GetAll(HttpContext.Session.GetUser().Token).Select(c => c.ToWebApp()));
         }
 
         #region Insert a contract
@@ -39,7 +39,7 @@ namespace AdopteDevWebApp.Controllers
             }
             _contractService.Insert(cc.ContractToWebApi());
             TempData["success"] = "Created with success! ";
-            return RedirectToAction("Index");
+            return RedirectToAction("create");
         }
         #endregion
     }
