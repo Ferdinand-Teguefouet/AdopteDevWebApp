@@ -16,7 +16,7 @@ namespace AdopteDevWebApp.Controllers
     {
         private readonly IService<User> _userService;
 
-        public UserController(IService<User> userService, IHashPw hashing)
+        public UserController(IService<User> userService)
         {
             _userService = userService;
         }

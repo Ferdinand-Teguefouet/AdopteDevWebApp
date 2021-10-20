@@ -1,6 +1,7 @@
 using AdopteDevWebApp.Interface;
 using AdopteDevWebApp.Services;
 using DataAccess.Entities;
+using DataAccess.Entities.FromViewsDb;
 using DataAccess.Interface;
 using DataAccess.Services;
 using Microsoft.AspNetCore.Builder;
@@ -35,6 +36,7 @@ namespace AdopteDevWebApp
             services.AddScoped<IService<User>, UserService>();
             services.AddScoped<IService<Contract>, ContractService>();
             services.AddScoped<IService<Skill>, SkillService>();
+            services.AddScoped<IService<ProfilDev>, ProfilDevService>();
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IHashPw, HashPwService>();

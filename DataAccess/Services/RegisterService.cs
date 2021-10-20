@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,8 +26,9 @@ namespace DataAccess.Services
         #endregion
 
         #region Using PostAsync() to insert / add
-        public void Insert(UserToAdd _obj)
+        public void Insert(UserToAdd _obj/*, string _token*/)
         {
+            //_client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _token);
             string jsonBody = JsonConvert.SerializeObject(_obj);
 
             using (HttpContent content = new StringContent(jsonBody, Encoding.UTF8, "application/json"))

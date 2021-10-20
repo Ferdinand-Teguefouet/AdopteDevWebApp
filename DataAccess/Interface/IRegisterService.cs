@@ -4,6 +4,6 @@ namespace DataAccess.Services
 {
     public interface IRegisterService
     {
-        void Insert(UserToAdd _obj);
+        void Insert(UserToAdd _obj/*, string _token*/);
     }
 }

@@ -21,12 +21,12 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-column-reverse">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
+                        @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        </li>*@
                         @if (SessionManager.userModel == null)
                         {
                             <li class="nav-item" style="text-align: right;">
@@ -39,11 +39,11 @@
                                 <a class="btn btn-danger" asp-area="" asp-controller="User" asp-action="Logout">Sign out</a>
                                 @if (SessionManager.userModel != null && SessionManager.userModel.IsClient)
                                     {
-                                        <span style="color: red; font-weight: 500; opacity: 0.3;">#Client</span>
+                                        <span style="color: red; font-weight: 500; opacity: 0.5;">@SessionManager.userModel.Name / #Client</span>
                                     }
                                     else
                                     {
-                                        <span style="color: red; font-weight: 500; opacity: 0.3;">#Developper</span>
+                            <span style="color: red; font-weight: 500; opacity: 0.5;">@SessionManager.userModel.Name / #Developper</span>
                                     }
                             </li>
                         }

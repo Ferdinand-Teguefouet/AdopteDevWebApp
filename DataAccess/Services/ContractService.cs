@@ -14,7 +14,7 @@ namespace DataAccess.Services
     public class ContractService : IService<Contract>
     {
         #region Properties
-        private string url = "https://localhost:44342/api/";
+        private readonly string url = "https://localhost:44342/api/";
 
         private readonly HttpClient _client;
         #endregion

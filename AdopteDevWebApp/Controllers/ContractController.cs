@@ -19,18 +19,21 @@ namespace AdopteDevWebApp.Controllers
             _contractService = contractservice;
         }
 
+        [DevRequired]
         public IActionResult Index()
         {
             return View(_contractService.GetAll(HttpContext.Session.GetUser().Token).Select(c => c.ToWebApp()));
         }
 
         #region Insert a contract
+        [ClientRequired]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [ClientRequired]
         public IActionResult Create([FromForm] CreateContract cc)
         {
             if (!ModelState.IsValid)

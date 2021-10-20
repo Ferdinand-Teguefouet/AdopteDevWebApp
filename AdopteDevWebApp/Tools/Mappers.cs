@@ -1,7 +1,10 @@
 ﻿using AdopteDevWebApp.Models.Contract;
+using AdopteDevWebApp.Models.ProfilDev;
+using AdopteDevWebApp.Models.Skill;
 using AdopteDevWebApp.Models.User;
 using AdopteDevWebApp.Security;
 using DataAccess.Entities;
+using DataAccess.Entities.FromViewsDb;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +59,27 @@ namespace AdopteDevWebApp.Tools
                 Token = u.Token,
                 Telephone = u.Telephone,
                 IsClient = u.IsClient
+            };
+        }
+
+        public static SkillModel SkillToWebApp(this Skill s)
+        {
+            return new SkillModel
+            {
+                Id = s.Id,
+                SkillName = s.SkillName,
+                Description = s.Description
+            };
+        }
+
+        public static ProfilDevModel ProfilDevToWebApi(this ProfilDev pd)
+        {
+            return new ProfilDevModel
+            {
+                Name = pd.Name,
+                Skill = pd.Skill,
+                Category = pd.Category,
+                Description = pd.Description
             };
         }
     }

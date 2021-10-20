@@ -39,7 +39,7 @@ namespace AdopteDevWebApp.Controllers
                 return View(rm);
             }
             //rm.Password = _hashService.HashPassword(rm.Password);
-            _userService.Insert(rm.UserToWebApi());
+            _userService.Insert(rm.UserToWebApi()/*, HttpContext.Session.GetUser().Token*/);
             TempData["success"] = "Inserted with success!";
             return RedirectToAction("Login", "Login");
         }
